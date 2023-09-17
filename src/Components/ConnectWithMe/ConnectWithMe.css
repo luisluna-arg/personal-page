@@ -1,0 +1,54 @@
+.App-links {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
+
+.App-links ul {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.App-links ul li {
+  width: 110px;
+}
+
+.App-links ul li {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.App-links ul li > a {
+  color: #636a82;
+  width: 150px;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.App-links ul li > a:hover {
+  color: #008c68;
+}
+
+.App-links span.icon {
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.App-links span.icon.linkedin {
+  background-image: url("../../../public/images/linkedin-round-line-icon.svg");
+}
+
+.App-links span.icon.github {
+  background-image: url("../../../public/images/github-icon.svg");
+}

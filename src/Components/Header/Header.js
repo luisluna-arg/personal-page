@@ -1,0 +1,23 @@
+import "./Header.css";
+
+function Header({ name }) {
+  return (
+    <section id="header-banner" className="header-banner App-section">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12 text-center">
+            <div className="header-text">
+              <h2>{name}</h2>
+              <p>Fullstack developer</p>
+              {/* <a href="assets/download/browney.txt" download>
+                download resume
+              </a> */}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Header;

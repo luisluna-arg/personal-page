@@ -1,0 +1,72 @@
+.header-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: url(../../../public/images/welcome-banner.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 80vh;
+  color: white;
+  z-index: 1;
+}
+
+.header-banner:before {
+  position: absolute;
+  content: " ";
+  top: 0;
+  left: 0;
+  background: rgba(31, 44, 108, 0.65);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.header-text {
+  position: relative;
+  z-index: 2;
+}
+
+.header-text h2 {
+  color: #fff;
+  font-size: 54px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.header-text h2 span {
+  color: #007c68;
+}
+
+.header-text p {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin: 30px 0 60px;
+  letter-spacing: 1px;
+}
+
+.header-text a {
+  width: 200px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 3px;
+  text-transform: capitalize;
+  color: #fff;
+  background: #009f68;
+  border: 1px solid #009f68;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  -webkit-transition: 0.3s linear;
+  -moz-transition: 0.3s linear;
+  -ms-transition: 0.3s linear;
+  -o-transition: 0.3s linear;
+  transition: 0.3s linear;
+}
+
+.header-text a:hover {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  background: #008c68;
+  border: 1px solid #008c68;
+}
