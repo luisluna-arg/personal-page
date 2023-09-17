@@ -2,7 +2,7 @@ import "./ConnectWithMe.css";
 
 function ConnectWithMe({ linkedinURL, githubURL }) {
   return (
-    <section className=" App-section App-links">
+    <section className="site-section site-social">
       <h2>Connect with Me</h2>
       <ul>
         <li>

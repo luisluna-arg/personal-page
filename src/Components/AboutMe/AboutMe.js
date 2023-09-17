@@ -3,7 +3,7 @@ import "./AboutMe.css";
 
 function AboutMe() {
   return (
-    <section className="App-content App-section">
+    <section className="about-me site-section">
       <div className="section-heading text-center">
         <h2>About Me</h2>
       </div>

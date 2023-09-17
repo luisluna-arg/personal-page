@@ -2,7 +2,7 @@ import "./Header.css";
 
 function Header({ name }) {
   return (
-    <section id="header-banner" className="header-banner App-section">
+    <section id="header-banner" className="header-banner site-section">
       <div className="container">
         <div className="row">
           <div className="col-md-12 text-center">

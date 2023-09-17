@@ -2,7 +2,7 @@ import "./Footer.css";
 
 function Footer({ email }) {
   return (
-    <footer className="App-section App-footer">
+    <footer className="site-section site-footer">
       <a href="mailto:email">{email}</a>
     </footer>
   );

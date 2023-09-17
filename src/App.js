@@ -13,7 +13,7 @@ function App() {
   const githubURL = "https://github.com/luisluna-arg/";
 
   return (
-    <div className="App">
+    <div className="site">
       <Navigation brand={"Luis Luna"} />
 
       <Header name={yourName}></Header>
