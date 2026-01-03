@@ -54,26 +54,5 @@ jobs:
             docker compose down
             docker compose build
             
-            # Start database first
-            docker compose up -d postgres redis
-            
-            # Wait for postgres to be ready
-            echo "Waiting for postgres..."
-            MAX_ATTEMPTS=30
-            ATTEMPT=0
-            until docker compose exec -T postgres pg_isready -U postgres; do
-              ATTEMPT=$((ATTEMPT + 1))
-              if [ $ATTEMPT -ge $MAX_ATTEMPTS ]; then
-                echo "Postgres failed to start after $MAX_ATTEMPTS attempts"
-                exit 1
-              fi
-              echo "Postgres not ready, attempt $ATTEMPT/$MAX_ATTEMPTS..."
-              sleep 2
-            done
-            echo "Postgres is ready!"
-            
-            # Run database migrations
-            docker compose run --rm migrate
-            
             # Start all services
             docker compose up -d
