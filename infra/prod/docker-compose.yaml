@@ -1,0 +1,22 @@
+name: personal-page
+
+services:
+  app:
+    container_name: personal-page-app
+    build:
+      context: ../..
+      dockerfile: src/Dockerfile.prod
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik_network"
+      - "traefik.http.routers.personal-page.rule=Host(`${APP_DOMAIN}`)"
+      - "traefik.http.routers.personal-page.entrypoints=websecure"
+      - "traefik.http.routers.personal-page.tls=true"
+      - "traefik.http.services.personal-page.loadbalancer.server.port=3000"
+    networks:
+      - traefik_network
+
+networks:
+  traefik_network:
+    external: true

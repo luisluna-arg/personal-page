@@ -1,0 +1,21 @@
+name: personal-page
+
+services:
+
+  app:
+    build:
+      context: ../..
+      dockerfile: src/Dockerfile
+    ports:
+      - "2708:3000"
+    restart: unless-stopped
+    volumes:
+      - ../..:/app
+      - personal-page-node-modules:/app/node_modules
+      - /app/build
+    command: npm run dev
+
+volumes:
+  redis-data:
+  postgres-data:
+  personal-page-node-modules:
