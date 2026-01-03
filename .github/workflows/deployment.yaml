@@ -5,11 +5,14 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'src/**'
-      - 'infra/prod/**'
-      - '.github/workflows/deployment.yaml'
-
+    # paths:
+    #   - 'src/**'
+    #   - 'infra/prod/**'
+    #   - '.github/workflows/deployment.yaml'
+  pull_request:
+    branches:
+      - main
+  
 jobs:
   deploy:
     name: Deploy
@@ -40,8 +43,34 @@ jobs:
             fi
             
             cd /var/www/personal-page-app/infra/prod
+            cat > .env << 'EOF'
+            ${{ secrets.ENV_FILE }}
+            EOF
             export APP_DOMAIN="${{ secrets.APP_DOMAIN }}"
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker compose down
             docker compose build
+            
+            # Start database first
+            docker compose up -d postgres redis
+            
+            # Wait for postgres to be ready
+            echo "Waiting for postgres..."
+            MAX_ATTEMPTS=30
+            ATTEMPT=0
+            until docker compose exec -T postgres pg_isready -U postgres; do
+              ATTEMPT=$((ATTEMPT + 1))
+              if [ $ATTEMPT -ge $MAX_ATTEMPTS ]; then
+                echo "Postgres failed to start after $MAX_ATTEMPTS attempts"
+                exit 1
+              fi
+              echo "Postgres not ready, attempt $ATTEMPT/$MAX_ATTEMPTS..."
+              sleep 2
+            done
+            echo "Postgres is ready!"
+            
+            # Run database migrations
+            docker compose run --rm migrate
+            
+            # Start all services
             docker compose up -d
