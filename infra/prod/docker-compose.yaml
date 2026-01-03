@@ -13,6 +13,7 @@ services:
       - "traefik.http.routers.personal-page.rule=Host(`${APP_DOMAIN}`)"
       - "traefik.http.routers.personal-page.entrypoints=websecure"
       - "traefik.http.routers.personal-page.tls=true"
+      - "traefik.http.routers.personal-page.tls.certresolver=le-resolver"
       - "traefik.http.services.personal-page.loadbalancer.server.port=3000"
     networks:
       - traefik_network
