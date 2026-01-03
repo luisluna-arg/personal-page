@@ -9,10 +9,7 @@ on:
       - 'src/**'
       - 'infra/prod/**'
       - '.github/workflows/deployment.yaml'
-  pull_request:
-    branches:
-      - main
-  
+
 jobs:
   deploy:
     name: Deploy
@@ -46,10 +43,10 @@ jobs:
             fi
             
             cd /var/www/personal-page-app/infra/prod
-            cat > .env << 'EOF'
-            ${{ secrets.ENV_FILE }}
-            EOF
-            export APP_DOMAIN="${{ secrets.APP_DOMAIN }}"
+            # Build APP_HOST_RULE from comma-separated domains
+            DOMAINS="${{ secrets.APP_HOST_RULE }}"
+            HOST_RULE=$(echo "$DOMAINS" | sed 's/,/\x60) || Host(\x60/g' | sed 's/^/Host(\x60/' | sed 's/$/\x60)/')
+            echo "APP_HOST_RULE=$HOST_RULE" > .env
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker compose down
             docker compose build
