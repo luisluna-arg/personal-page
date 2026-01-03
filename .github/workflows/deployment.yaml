@@ -46,9 +46,7 @@ jobs:
             fi
             
             cd /var/www/personal-page-app/infra/prod
-            cat > .env << EOF
-            APP_HOST_RULE=${{ secrets.APP_HOST_RULE }}
-            EOF
+            echo "APP_HOST_RULE=${{ secrets.APP_HOST_RULE }}" > .env
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker compose down
             docker compose build
