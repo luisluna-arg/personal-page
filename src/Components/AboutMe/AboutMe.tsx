@@ -1,7 +1,8 @@
+import React from "react";
 import Container from "react-bootstrap/Container";
 import "./AboutMe.css";
 
-function AboutMe() {
+const AboutMe: React.FC = () => {
   return (
     <section className="about-me site-section">
       <div className="section-heading text-center">

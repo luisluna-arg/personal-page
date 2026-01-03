@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import AboutMe from "./Components/AboutMe/AboutMe";
 import ConnectWithMe from "./Components/ConnectWithMe/ConnectWithMe";
@@ -5,7 +6,7 @@ import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
 import Navigation from "./Components/Navigation/Navigation";
 
-function App() {
+const App: React.FC = () => {
   const yourName = "Luis Luna";
   const email = "luismluna87@gmail.com";
   const linkedinURL = "https://www.linkedin.com/in/luismluna/";

@@ -1,6 +1,11 @@
+import React from "react";
 import "./Header.css";
 
-function Header({ name }) {
+interface HeaderProps {
+  name: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ name }) => {
   return (
     <section id="header-banner" className="header-banner site-section">
       <div className="container">
