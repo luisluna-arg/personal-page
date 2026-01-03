@@ -10,19 +10,19 @@ function AboutMe() {
 
       <Container>
         <p>
-          I hold a Bachelor's degree in Computer Science from the Universidad
+          I hold a Bachelor&apos;s degree in Computer Science from the Universidad
           Nacional de la Patagonia San Juan Bosco. My academic background has
           provided me with a solid foundation in computer science.
         </p>
         <p>
           My main area of expertise centers around backend development, with a
-          specialization in .NET Core. Over the years, I've gained extensive
+          specialization in .NET Core. Over the years, I&apos;ve gained extensive
           experience working with various relational databases, including
-          Oracle, SQL Server, and PostgreSQL. I'm also well-versed in .NET
+          Oracle, SQL Server, and PostgreSQL. I&apos;m also well-versed in .NET
           Framework 4.x.
         </p>
         <p>
-          In addition to backend development, I've contributed to several web
+          In addition to backend development, I&apos;ve contributed to several web
           projects involving JavaScript, CSS, and jQuery. While my primary focus
           has been on backend work, I also have some experience with frontend
           technologies, having dabbled in React and Vue.

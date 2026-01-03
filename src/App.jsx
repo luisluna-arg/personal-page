@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import AboutMe from "./Components/AboutMe/AboutMe";
 import ConnectWithMe from "./Components/ConnectWithMe/ConnectWithMe";

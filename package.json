@@ -21,6 +21,6 @@
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint src --ext .js,.jsx"
+    "lint": "eslint src"
   }
 }
