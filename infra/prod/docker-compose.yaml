@@ -10,7 +10,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik_network"
-      - "traefik.http.routers.personal-page.rule=Host(`${APP_DOMAIN}`)"
+      - "traefik.http.routers.personal-page.rule=${APP_HOST_RULE}"
       - "traefik.http.routers.personal-page.entrypoints=websecure"
       - "traefik.http.routers.personal-page.tls=true"
       - "traefik.http.routers.personal-page.tls.certresolver=le-resolver"
