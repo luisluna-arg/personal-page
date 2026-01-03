@@ -10,10 +10,19 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik_network"
+      # HTTP router (for ACME challenge and redirect)
+      - "traefik.http.routers.personal-page-http.rule=${APP_HOST_RULE}"
+      - "traefik.http.routers.personal-page-http.entrypoints=web"
+      - "traefik.http.routers.personal-page-http.middlewares=https-redirect"
+      # HTTPS router (main)
       - "traefik.http.routers.personal-page.rule=${APP_HOST_RULE}"
       - "traefik.http.routers.personal-page.entrypoints=websecure"
       - "traefik.http.routers.personal-page.tls=true"
       - "traefik.http.routers.personal-page.tls.certresolver=le-resolver"
+      # Redirect middleware
+      - "traefik.http.middlewares.https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.https-redirect.redirectscheme.permanent=true"
+      # Service port
       - "traefik.http.services.personal-page.loadbalancer.server.port=3000"
     networks:
       - traefik_network
