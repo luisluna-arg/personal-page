@@ -1,12 +1,17 @@
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
-function Navigation({ brand }) {
+interface NavigationProps {
+  brand: string;
+}
+
+const Navigation: React.FC<NavigationProps> = ({ brand }) => {
   return (
     <Navbar expand="lg">
       <Container>
-        <Navbar.Brand href="#home" icon>
+        <Navbar.Brand href="#home">
           {brand}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

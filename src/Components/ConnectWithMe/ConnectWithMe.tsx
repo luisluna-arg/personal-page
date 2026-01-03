@@ -1,6 +1,12 @@
+import React from "react";
 import "./ConnectWithMe.css";
 
-function ConnectWithMe({ linkedinURL, githubURL }) {
+interface ConnectWithMeProps {
+  linkedinURL: string;
+  githubURL: string;
+}
+
+const ConnectWithMe: React.FC<ConnectWithMeProps> = ({ linkedinURL, githubURL }) => {
   return (
     <section className="site-section site-social">
       <h2>Connect with Me</h2>

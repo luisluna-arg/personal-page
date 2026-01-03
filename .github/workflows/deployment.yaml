@@ -1,0 +1,46 @@
+name: Deploy to Cloud Server
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'infra/prod/**'
+      - '.github/workflows/deployment.yaml'
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            set -e
+            
+            mkdir -p /var/www/personal-page-app
+            
+            if [ ! -d "/var/www/personal-page-app/.git" ]; then
+              git clone -b ${{ github.ref_name }} https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git /var/www/personal-page-app
+            else
+              cd /var/www/personal-page-app
+              git fetch origin
+              git checkout ${{ github.ref_name }}
+              git pull origin ${{ github.ref_name }}
+            fi
+            
+            cd /var/www/personal-page-app/infra/prod
+            export APP_DOMAIN="${{ secrets.APP_DOMAIN }}"
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+            docker compose down
+            docker compose build
+            docker compose up -d
