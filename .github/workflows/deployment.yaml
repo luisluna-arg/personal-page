@@ -9,7 +9,10 @@ on:
       - 'src/**'
       - 'infra/prod/**'
       - '.github/workflows/deployment.yaml'
-
+  pull_request:
+    branches:
+      - main
+  
 jobs:
   deploy:
     name: Deploy
@@ -28,20 +31,28 @@ jobs:
           script: |
             set -e
             
+            # Use head ref for PRs, otherwise use ref_name
+            BRANCH="${{ github.head_ref || github.ref_name }}"
+            
             mkdir -p /var/www/personal-page-app
             
             if [ ! -d "/var/www/personal-page-app/.git" ]; then
-              git clone -b ${{ github.ref_name }} https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git /var/www/personal-page-app
+              git clone -b $BRANCH https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git /var/www/personal-page-app
             else
               cd /var/www/personal-page-app
               git fetch origin
-              git checkout ${{ github.ref_name }}
-              git pull origin ${{ github.ref_name }}
+              git checkout $BRANCH
+              git reset --hard origin/$BRANCH
             fi
             
             cd /var/www/personal-page-app/infra/prod
+            cat > .env << 'EOF'
+            ${{ secrets.ENV_FILE }}
+            EOF
             export APP_DOMAIN="${{ secrets.APP_DOMAIN }}"
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker compose down
             docker compose build
+            
+            # Start all services
             docker compose up -d

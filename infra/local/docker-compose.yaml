@@ -16,6 +16,4 @@ services:
     command: npm run dev
 
 volumes:
-  redis-data:
-  postgres-data:
   personal-page-node-modules:
